@@ -1,4 +1,4 @@
-﻿using PrePassClient.Models;
+﻿using PrePass.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,12 +22,14 @@ namespace PrePassClient
     //                       .GetName();
     //    }
     //}
-    class Program 
+    class Program
     {
         static void Main(string[] args)
         {
             GetAllReports().Wait();
         }
+
+
 
         private static async Task GetAllReports()
         {
@@ -40,21 +42,52 @@ namespace PrePassClient
 
             if (response.IsSuccessStatusCode)
             {
-                IEnumerable<Report> reports = await response.Content.ReadAsAsync<IEnumerable<Report>>();
+                Report reports = await response.Content.ReadAsAsync<Report>();
+                Report empty = new Report();
+
+
+                Console.WriteLine(reports.ToString());
+
+                //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}")]
+
+                foreach (ReportItem r in reports.Incomes)
+                {
+                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                }
+
+                foreach (ReportItem r in reports.Children)
+                {
+                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                }
+
+                foreach (ReportItem r in reports.Ethnicities)
+                {
+                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                }
+
+                foreach (ReportItem r in reports.Genders)
+                {
+                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                }
+
+                foreach (ReportItem r in reports.Households)
+                {
+                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                }
 
                 foreach (ReportItem r in reports.Reasons)
                 {
                     Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
                 }
 
-                foreach (Report r in reports)
+                foreach (ReportItem r in reports.Statuses)
                 {
                     Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
                 }
             }
-          
+
             else
-                {
+            {
                 Console.WriteLine(response.StatusCode + " Reason Phrase: " + response.ReasonPhrase);
             }
         }

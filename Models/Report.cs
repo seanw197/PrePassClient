@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PrePassClient.Models
+namespace PrePass.Models
 {
     public class ReportItem
     {
