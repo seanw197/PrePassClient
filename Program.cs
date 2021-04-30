@@ -1,19 +1,35 @@
 ﻿using PrePassClient.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PrePassClient
 {
-    class Program
+
+    //public static class EnumDisplayName
+    //{
+    //    // get the display name for a given enum value
+    //    public static string GetDisplayName(this Enum enumValue)
+    //    {
+    //        return enumValue.GetType().GetMember(enumValue.ToString())
+    //                       .First()
+    //                       .GetCustomAttribute<DisplayAttribute>()
+    //                       .GetName();
+    //    }
+    //}
+    class Program 
     {
         static void Main(string[] args)
         {
             GetAllReports().Wait();
         }
 
-        public static async Task GetAllReports()
+        private static async Task GetAllReports()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:14504/");
@@ -24,23 +40,19 @@ namespace PrePassClient
 
             if (response.IsSuccessStatusCode)
             {
-                IEnumerable<ReportItem> reports = await response.Content.ReadAsAsync<IEnumerable<ReportItem>>();
+                IEnumerable<Report> reports = await response.Content.ReadAsAsync<IEnumerable<Report>>();
 
-
-                foreach (ReportItem r in reports)
+                foreach (ReportItem r in reports.Reasons)
                 {
-                    Console.WriteLine(r.ToString());
+                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                }
+
+                foreach (Report r in reports)
+                {
+                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
                 }
             }
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    IEnumerable<Report> reports = await response.Content.ReadAsAsync<IEnumerable<Report>>();
-
-            //    foreach (Report r in reports)
-            //    {
-            //        Console.WriteLine(r);
-            //    }
-            //}
+          
             else
                 {
                 Console.WriteLine(response.StatusCode + " Reason Phrase: " + response.ReasonPhrase);

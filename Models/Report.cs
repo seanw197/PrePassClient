@@ -66,7 +66,7 @@ namespace PrePassClient.Models
 
         public override string ToString()
         {
-            return String.Format("ID: {0} | Report Title: {1} | Start Date: {2} | End Date: {3} | Number of Assessments: {4} | First Time Applicants: {5}| Repeat Applicants: {6} | Gender Distribution: {7}| Ethnic Distribution: {8} | Reason for Homelesness: {9}| Household Type: {10}| District: {11}| Children: {12}| Income Status: {13}| Income Status: {15}| Addiction Status: {16}| Assessment Status: {17}", ID, ReportTitle, StartDate, EndDate, AssessmentCount, FirstTimeApp, RepeatApp, Genders, Ethnicities, Reasons, Households, Districts, Children, Incomes, Addictions, Statuses);
+            return String.Format("{0} \nStart Date: {1} End Date: {2} \nNumber of Assessments: {3} \nFirst Time Applicants: {4} \nRepeat Applicants: {5}", ReportTitle, StartDate, EndDate, AssessmentCount, FirstTimeApp, RepeatApp);
         }
     }
 }
