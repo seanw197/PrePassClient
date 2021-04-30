@@ -1,4 +1,4 @@
-﻿using PrePass.Models;
+﻿using PrePassClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -13,21 +13,21 @@ namespace PrePassClient
             GetAllReports().Wait();
         }
 
-        private static async Task GetAllReports()
+        public static async Task GetAllReports()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:14504/");
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = await client.GetAsync("api/Reports");
+            HttpResponseMessage response = await client.GetAsync("api/apireports");
 
 
             if (response.IsSuccessStatusCode)
             {
-                IEnumerable<Report> reports = await response.Content.ReadAsAsync<IEnumerable<Report>>();
+                IEnumerable<ReportItem> reports = await response.Content.ReadAsAsync<IEnumerable<ReportItem>>();
 
 
-                foreach (Report r in reports)
+                foreach (ReportItem r in reports)
                 {
                     Console.WriteLine(r.ToString());
                 }
