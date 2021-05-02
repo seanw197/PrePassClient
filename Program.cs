@@ -52,6 +52,7 @@ namespace PrePassClient
 
                 //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}")]
 
+                
                 foreach (ReportItem r in reports.Incomes)
                 {
                     Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
