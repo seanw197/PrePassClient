@@ -20,7 +20,7 @@ namespace PrePass.Models
         public int ID { get; set; }
 
         [Display(Name = "Report Title")]
-        public string ReportTitle = "PrePass Summary Report";
+        public string ReportTitle = "PREPASS MONTHLY SUMMARY REPORT\n";
 
         [Display(Name = "Start Date")]
         public string StartDate { get; set; }
@@ -66,7 +66,7 @@ namespace PrePass.Models
 
         public override string ToString()
         {
-            return String.Format("{0} \nStart Date: {1} End Date: {2} \nNumber of Assessments: {3} \nFirst Time Applicants: {4} \nRepeat Applicants: {5}", ReportTitle, StartDate, EndDate, AssessmentCount, FirstTimeApp, RepeatApp);
+            return String.Format("{0} \nStart Date: {1} End Date: {2}\n \nNumber of Assessments: {3} \nFirst Time Applicants: {4} \nRepeat Applicants: {5}", ReportTitle, StartDate, EndDate, AssessmentCount, FirstTimeApp, RepeatApp);
         }
     }
 }
