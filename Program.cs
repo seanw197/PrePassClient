@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 namespace PrePassClient
 {
 
-    //public static class EnumDisplayName
+    //public static class ListDisplayName
     //{
     //    // get the display name for a given enum value
-    //    public static string GetDisplayName(this Enum enumValue)
+    //    public static string GetDisplayName(this IList Value)
     //    {
-    //        return enumValue.GetType().GetMember(enumValue.ToString())
+    //        return Value.GetType().GetMember(Value.ToString())
     //                       .First()
     //                       .GetCustomAttribute<DisplayAttribute>()
     //                       .GetName();
@@ -35,7 +35,12 @@ namespace PrePassClient
             HttpClient client = new HttpClient();
             //           client.BaseAddress = new Uri("http://localhost:14504/");
 
+            //Sean's
             client.BaseAddress = new Uri("https://prepass.azurewebsites.net/");
+
+            //Niamh's
+            //client.BaseAddress = new Uri("https://prepass20210501170450.azurewebsites.net/");
+
 
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -52,41 +57,84 @@ namespace PrePassClient
 
                 //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}")]
 
-                
-                foreach (ReportItem r in reports.Incomes)
+                Console.WriteLine("\nGENDER DISTRIBUTION\n");
+                foreach (ReportItem r in reports.Genders)
                 {
-                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
                 }
 
-                foreach (ReportItem r in reports.Children)
-                {
-                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
-                }
+                Console.WriteLine();
+
+                Console.WriteLine("ETHNIC DISTRIBUTION\n");
 
                 foreach (ReportItem r in reports.Ethnicities)
                 {
-                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
                 }
 
-                foreach (ReportItem r in reports.Genders)
+                Console.WriteLine();
+
+                Console.WriteLine("REASON FOR HOMELESSNESS\n");
+                foreach (ReportItem r in reports.Reasons)
                 {
-                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
                 }
+
+                Console.WriteLine();
+
+                Console.WriteLine("HOUSEHOLD TYPE\n");
 
                 foreach (ReportItem r in reports.Households)
                 {
-                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
                 }
 
-                foreach (ReportItem r in reports.Reasons)
+                Console.WriteLine();
+
+                Console.WriteLine("DISTRICT\n");
+
+                foreach (ReportItem r in reports.Districts)
                 {
-                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
                 }
+
+                Console.WriteLine();
+
+                Console.WriteLine("CHILDREN\n");
+
+                foreach (ReportItem r in reports.Children)
+                {
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
+                }
+
+                Console.WriteLine();
+
+                Console.WriteLine("INCOME STATUS\n");
+                foreach (ReportItem r in reports.Incomes)
+                {
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
+                }
+
+                Console.WriteLine();
+
+                Console.WriteLine("ADDICTION STATUS\n");
+
+                foreach (ReportItem r in reports.Addictions)
+                {
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
+                }
+
+                Console.WriteLine();
+
+                Console.WriteLine("ASSESSMENT STATUS\n");
 
                 foreach (ReportItem r in reports.Statuses)
                 {
-                    Console.WriteLine(r.Item.ToString() + " " + r.Count.ToString());
+                    Console.WriteLine(r.Item.ToString() + ": " + r.Count.ToString());
                 }
+
+                Console.WriteLine();
+
             }
 
             else
