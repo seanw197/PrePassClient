@@ -11,17 +11,6 @@ using System.Threading.Tasks;
 namespace PrePassClient
 {
 
-    //public static class ListDisplayName
-    //{
-    //    // get the display name for a given enum value
-    //    public static string GetDisplayName(this IList Value)
-    //    {
-    //        return Value.GetType().GetMember(Value.ToString())
-    //                       .First()
-    //                       .GetCustomAttribute<DisplayAttribute>()
-    //                       .GetName();
-    //    }
-    //}
     class Program
     {
         static void Main(string[] args)
@@ -33,19 +22,12 @@ namespace PrePassClient
         private static async Task GetAllReports()
         {
             HttpClient client = new HttpClient();
-            //           client.BaseAddress = new Uri("http://localhost:14504/");
-
-            //Sean's
+ 
             client.BaseAddress = new Uri("https://prepass.azurewebsites.net/");
-
-            //Niamh's
-            //client.BaseAddress = new Uri("https://prepass20210501170450.azurewebsites.net/");
-
 
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             HttpResponseMessage response = await client.GetAsync("api/apireports");
-
 
             if (response.IsSuccessStatusCode)
             {
@@ -54,8 +36,6 @@ namespace PrePassClient
 
 
                 Console.WriteLine(reports.ToString());
-
-                //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}")]
 
                 Console.WriteLine("\nGENDER DISTRIBUTION\n");
                 foreach (ReportItem r in reports.Genders)
@@ -134,9 +114,7 @@ namespace PrePassClient
                 }
 
                 Console.WriteLine();
-
             }
-
             else
             {
                 Console.WriteLine(response.StatusCode + " Reason Phrase: " + response.ReasonPhrase);
